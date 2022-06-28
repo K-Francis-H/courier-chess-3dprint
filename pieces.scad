@@ -33,7 +33,9 @@ module pawn(){
         cylinder(d1=10, d2=15, h=10);
     }
     translate([0,0,20]){
-        sphere(d=13.5);
+        //sphere(d=13.5); => for a collar, also hides the bottom of sphere
+        //corrected with dome()
+        dome(15);
     }
 }
 //pawn();
@@ -74,7 +76,7 @@ module alfil(){
     }
     
 }
-alfil();
+//alfil();
 
 module mann(){
     scale([10,10,10]){//mm => cm
@@ -195,3 +197,167 @@ module watchtower_rook(){
     
 }
 //watchtower_rook();
+
+module king(){
+    scale([10,10,10]){
+        cylinder(d1=2.5, d2=1, h=1.5);
+        difference(){
+            hull(){
+                translate([0,0,1.5]){
+                    cylinder(d1=1, d2=1.5, h=2.5);
+                }
+                translate([0,0,4]){
+                    for(a=[0:45:360]){
+                        translate([sin(a)/1.75,cos(a)/1.75,0]){
+                            cylinder(d=0.3,h=0.75);
+                        }
+                    }
+                }
+            }
+            hull(){
+                translate([0,0,4]){
+                    for(a=[0:45:360]){
+                        translate([sin(a)/2.5,cos(a)/2.5,0]){
+                            cylinder(d1=0.3, d2=0.4,h=0.75);
+                        }
+                    }
+                }
+            }
+        }
+        //maybe add half_cylinder cross on the top
+    }
+}
+//king();
+
+module courier(){//bishop
+    scale([10,10,10]){//mm => cm
+        cylinder(d1=2, d2=1, h=2);
+        translate([0,0,2]){
+            cylinder(d1=1, d2=1.5, h=1);
+        }
+        
+        difference(){
+            translate([0,0,3]){
+                scale([1,1,2]){
+                    dome(1.5);
+                }
+                
+            }
+            translate([0.5,0,4])
+            rotate([0,-60,0])
+            cylinder(d=2,h=0.3);
+            
+        }
+    }
+}
+//courier();
+
+module knight(){
+    scale([10,10,10]){//mm => cm
+        cylinder(d1=2, d2=1.5, h=1);
+        
+        //shoulder
+        hull(){
+            translate([0,0,1]){
+                cylinder(d=1.5,h=0.001);
+            }
+            
+            translate([0,0.75,2]){
+                sphere(d=0.75);
+            }
+        }
+        
+        //neck
+        hull(){
+            translate([0,0.75,2]){
+                sphere(d=0.75);
+            }
+            translate([0,0,2.5]){
+                dome(d=0.75);
+            }
+        }
+        
+        //head/snout
+        hull(){
+            translate([0,0.75,2]){
+                sphere(d=0.75);
+            }
+            translate([0,0,2.5]){
+                dome(d=0.75);
+            }
+            translate([0,-0.8,1.25])
+            rotate([-40,0,0])
+            scale([1,1.3,1])
+            cylinder(d1=0.3,d2=0.75,h=1);
+        }
+        //mane
+        hull(){
+            translate([-0.15,0,2.5]){
+                cube([0.3,0.1,0.5]);
+            }
+            
+            translate([-0.15,0.9,1.9]){
+                cube([0.3,0.1,0.5]);
+            }
+        }
+        
+    }
+}
+//knight();
+
+module bigger_knight(){
+    scale([10,10,10]){//mm => cm
+        cylinder(d1=2, d2=1.5, h=1);
+        
+        //shoulder
+        hull(){
+            translate([0,0,1]){
+                cylinder(d=1.5,h=0.001);
+            }
+            
+            translate([0,0.75,2]){
+                sphere(d=1);
+            }
+        }
+        
+        //neck
+        hull(){
+            translate([0,0.75,2]){
+                sphere(d=1);
+            }
+            translate([0,0,3]){
+                dome(d=1);
+            }
+        }
+        
+        //head/snout
+        hull(){
+            translate([0,0.75,2]){
+                sphere(d=1);
+            }
+            translate([0,0,3]){
+                dome(d=1);
+            }
+            translate([0,-0.8,1.15])
+            rotate([-30,0,0])
+            scale([1,1.5,1])
+            cylinder(d1=0.5,d2=0.7,h=1);
+        }
+        
+        hull(){
+            translate([-0.25,0,3.3]){
+                cube([0.5,0.1,0.7]);
+            }
+            
+            translate([-0.25,1.05,2.1]){
+                cube([0.5,0.1,0.7]);
+            }
+        }
+        
+    }
+}
+bigger_knight();
+
+module ferz(){//queen
+    
+}
