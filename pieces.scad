@@ -33,12 +33,60 @@ module pawn(){
         cylinder(d1=10, d2=15, h=10);
     }
     translate([0,0,20]){
-        //sphere(d=13.5); => for a collar, also hides the bottom of sphere
+        sphere(d=12.5);// => for a collar, also hides the bottom of sphere
         //corrected with dome()
-        dome(15);
+        //dome(15);
     }
 }
 //pawn();
+
+module promo_disc_alt(){
+    difference(){
+        difference(){
+            translate([0,0,20]){
+                cylinder(d1=18, d2=22, h=5);
+            }
+            pawn();
+        }
+        union(){
+            cylinder(d=13.5,h=100);
+            translate([0,50,25]){
+                rotate([90,0,0]){
+                    cylinder(d=5,h=100);
+                }
+            }
+            translate([-50,0,25]){
+                rotate([0,90,0]){
+                    cylinder(d=5,h=100);
+                }
+            }
+        }
+    }
+}
+promo_disc_alt();
+
+module promotion_disc(){
+    difference(){
+        difference(){
+            cylinder(d1=18,d2=25,h=10);
+            pawn();
+        }
+        union(){
+            cylinder(d=18,h=40);
+            translate([0,50,5]){
+                rotate([90,0,0]){
+                    cylinder(d=5,h=100);
+                }
+            }
+            translate([-50,0,5]){
+                rotate([0,90,0]){
+                    cylinder(d=5,h=100);
+                }
+            }
+        }
+    }
+}
+//promotion_disc();
 
 module alfil(){
     difference(){
@@ -182,7 +230,7 @@ module wazir(){//jester look
 
 module watchtower_rook(){
     scale([10,10,10]){
-        $fn=6;
+        $fn=6;//4 is cool to
         cylinder(d1=2, d2=1.75, h=2);
         translate([0,0,2]){
             cylinder(d1=1.75, d2=2.5, h=0.5);
@@ -356,8 +404,33 @@ module bigger_knight(){
         
     }
 }
-bigger_knight();
+//bigger_knight();
 
 module ferz(){//queen
-    
+    scale([10,10,10]){//mm => cm
+        
+        cylinder(d1=2, d2=1, h=2);
+        translate([0,0,2]){
+            difference(){
+                difference(){
+                    cylinder(d1=1, d2=1.5, h=1);
+                    cylinder(d1=0.5, d2=1, h=1);
+                }
+                union(){
+                    for(a=[0:45:360]){//make cutout cones every 45 deg around edge
+                        //cutout from top down
+                        translate([1.5*sin(a)/2,1.5*cos(a)/2,0.5]){
+                            cylinder(d1=0,d2=0.7, h=0.5);
+                        }
+                        //offset by 45/2 cutout from base up
+                        translate([sin(a+22.5)/2,cos(a+22.5)/2,0]){
+                            cylinder(d1=0.3,d2=0, h=0.5);
+                        }
+                    }
+                }
+            }
+            cylinder(d1=1,d2=0.3,h=1.5);
+        }
+    }
 }
+//ferz();
