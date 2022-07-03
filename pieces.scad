@@ -33,12 +33,69 @@ module pawn(){
         cylinder(d1=10, d2=15, h=10);
     }
     translate([0,0,20]){
-        sphere(d=12.5);// => for a collar, also hides the bottom of sphere
+        //sphere(d=12.5);// => for a collar, also hides the bottom of sphere
         //corrected with dome()
-        //dome(15);
+        dome(15);
     }
 }
 //pawn();
+
+module promo_crown(){
+    scale([10,10,10]){
+        hull(){
+            translate([-0.5,-0.05,0])
+            cube([0.1,0.1,0.1]);
+            
+            translate([0.4,-0.05,0])
+            cube([0.1,0.1,0.1]);
+            
+            translate([-1,-0.05,0.5])
+            cube([0.1,0.1,0.1]);
+            
+            translate([0.9,-0.05,0.5])
+            cube([0.1,0.1,0.1]);
+        }
+        
+        hull(){
+            translate([-0.5,-0.05,0])
+            cube([0.1,0.1,0.1]);
+            
+            translate([0.4,-0.05,0])
+            cube([0.1,0.1,0.1]);
+            
+            translate([-0.005,-0.05,1])
+            cube([0.01,0.1,0.1]);
+        }
+        
+        hull(){
+            translate([-0.05,-0.3,0.5])
+            cube([0.1,0.1,0.01]);
+            
+            translate([-0.05,-0.05,0.4])
+            cube([0.1,0.1,0.1]);
+            
+            translate([-0.05,-0.05,0])
+            cube([0.1,0.1,0.1]);
+        }
+    }
+}
+
+//promo_crown();
+
+//translate([0,0,23])
+//promo_crown();
+
+module crown_pawn(){
+    difference(){
+        
+        pawn();
+        
+        translate([0,0,23])
+        scale([1.5,1.5,1.5])
+        promo_crown();
+    }
+}
+crown_pawn();
 
 module promo_disc_alt(){
     difference(){
@@ -63,7 +120,7 @@ module promo_disc_alt(){
         }
     }
 }
-promo_disc_alt();
+//promo_disc_alt();
 
 module promotion_disc(){
     difference(){
